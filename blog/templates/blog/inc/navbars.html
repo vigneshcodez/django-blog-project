@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg bg-info">
+  <div class="container-fluid">
+    <a class="navbar-brand logotext" href="{% url 'home'  %}"><b>Home</b></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">menu</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'savedpage' %}">Saved Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'topicspage' %}">Topics</a>
+        </li>
+      </ul>
+
+
+
+      {% if request.user.is_authenticated %}
+      <button class="btn btn-primary" type="submit">
+        <a class="nav-link " aria-current="page" href="{% url 'logoutpage' %}">Logout</a>
+      </button>
+      {% else %}
+      <button class="btn btn-primary" type="submit">
+        <a class="nav-link " aria-current="page" href="{% url 'loginpage' %}">Sign in</a>
+      </button>
+      <button class="btn mx-2" style="background-color: yellow;" type="submit">
+        <a class="nav-link " aria-current="page" href="{% url 'registerpage' %}">Sign up</a>
+      </button></a>
+      {% endif %}
+
+    </div>
+  </div>
+</nav>

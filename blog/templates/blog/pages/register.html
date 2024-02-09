@@ -1,0 +1,69 @@
+{% extends 'blog/layout/base.html' %}
+{% block content %}
+{% include 'blog/inc/navbars.html' %}
+
+
+<!-- {{form.as_p}} -->
+<div class="container">
+  <div class="row">
+    <div class="col mx-auto text-center">
+
+      <div class="text-danger">
+        {% if form.errors.username %}
+        <span>{{form.errors.username}}</span>
+        {% endif %}
+
+        {% if form.errors.email %}
+        <span>{{form.errors.email}}</span>
+        {% endif %}
+
+        {% if form.errors.password1 %}
+        {{form.errors.password1}}
+        {% endif %}
+
+        {% if form.errors.password2 %}
+        <span>{{form.errors.password2}}</span>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col ">
+      <form class="form mx-auto "
+        style="box-shadow: 5px 5px 10px 1px rgb(130, 130, 218);margin-top: 100px;margin-bottom: 50px;" method="post">
+        {% csrf_token %}
+        <p class="title">Register </p>
+        <p class="message">Signup now and get full access to our app. </p>
+
+        <label>
+          {{form.username}}
+          <span>username</span>
+        </label>
+
+
+        <label>
+          {{form.email}}
+          <span>email</span>
+        </label>
+
+        <label>
+          {{form.password1}}
+          <span>new password</span>
+        </label>
+        <label>
+          {{form.password2}}
+          <span>confirm password</span>
+        </label>
+        <button class="submit" type="submit">Submit</button>
+        <p class="signin">Already have an acount ? <a href="{% url 'loginpage' %}">Signin</a> </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

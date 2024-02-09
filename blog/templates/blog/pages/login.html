@@ -1,0 +1,33 @@
+{% extends 'blog/layout/base.html' %}
+{% block content %}
+{% include 'blog/inc/navbars.html' %}
+{% include 'blog/inc/messages.html' %}
+
+<div class="container">
+  <div class="row">
+    <div class="col ">
+      <form class="form mx-auto " style="box-shadow: 5px 5px 10px 1px rgb(130, 130, 218);margin-top: 100px;"
+        method="post">
+        {% csrf_token %}
+        <p class="title">Login</p>
+        <p class="message">Signup now and get full access to our app. </p>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" name="username">
+          <span>Username</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="password" class="input" name="password">
+          <span>Password</span>
+        </label>
+
+        <button class="submit" type="submit">Submit</button>
+        <p class="signin">If you don't have an acount ? <a href="{% url 'registerpage' %}">Signin</a> </p>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

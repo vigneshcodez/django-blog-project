@@ -1,0 +1,70 @@
+{% extends 'blog/layout/base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'blog/inc/navbars.html' %}
+<div class="row">
+  <div class="col-md-6 col-12 mx-md-auto mb-3 pb-2 mx-3 ">
+    <h1 class="text-center">{{article.title}}</h1>
+    <div class="row">
+
+      <div class="col-12">
+        <input type="hidden" value="{{article.id}}" id="aid">
+        {% csrf_token %}
+        {% if article.videolink %}
+        <iframe style="width: 100%;height: 40vh;" src="{{article.videolink}}" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+        {% else %}
+        <img src="{{article.postimage.url}}" class="img-fluid" alt="">
+        {% endif %}
+      </div>
+
+    </div>
+    <p class="text-muted">{{article.date}}</p>
+    <p class="text-muted">posted by {{article.author.username}}</p>
+
+    <div>
+      {{article.content|safe}}
+    </div>
+    <div class="text-center">
+      <button class="btn btn-danger" id="fav">
+        save post
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const aid = document.getElementById('aid');
+  const fav = document.getElementById('fav');
+
+  fav.addEventListener('click', () => {
+
+
+
+    let postobj = {
+      "aid": aid.value,
+    }
+    fetch('/fav', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': '{{csrf_token}}'
+      },
+      body: JSON.stringify(postobj)
+    }).then(response => { return response.json() })
+      .then(data => { alert(data['status']) })
+      .catch(error => {
+        console.error('Fetch error:', error);
+      });
+
+  })
+
+
+</script>
+{% endblock content %}

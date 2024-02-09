@@ -1,0 +1,47 @@
+{% extends 'blog/layout/base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'blog/inc/navbars.html' %}
+<section class="text-center container" style="margin-top: 70px;">
+
+    <div class="col mx-auto">
+      <h1 class="fw-light">Topics</h1>
+      <p class="lead text-muted">
+        Your now viewing the most wanted topics in tech industry
+      </p>
+
+    </div>
+
+</section>
+<!-- -->
+<section class="bg-light py-4 my-5">
+  <div class="container">
+    <div class="row">
+
+
+      <!--  -->
+      {% for topic in topics %}
+      <div class="col-md-3 col-lg-3">
+        <div class=" my-3 text-center">
+          <a href="{% url 'topicarticlepage'  topic.name %}" class="text-decoration-none text-dark">
+            <img src="{{topic.image.url}}" class=" img-fluid text-center" alt="" height="200px
+          ">
+            <div class="mt-3">
+              <h5 class="card-title text-primary">{{topic.name}}</h5>
+              <p class="card-text ">{{topic.description}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+      <!--  -->
+
+    </div>
+  </div>
+
+
+</section>
+<!--  -->
+
+{% endblock content %}

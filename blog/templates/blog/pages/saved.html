@@ -1,0 +1,35 @@
+{% extends 'blog/layout/base.html' %}
+{% block content %}
+{% include 'blog/inc/navbars.html' %}
+
+<div class="container text-center">
+  <h1 class="text-muted">HELLO {{request.user}} Your saved posts are here </h1>
+</div>
+
+{% for post in saved %}
+<div class="row">
+  <div class="col-md-6 col-11 mx-md-auto mt-5 mb-5 mx-3">
+    <a href="" class="text-decoration-none">
+      <a href="{% url 'detailedview' post.article.catregory post.article.title  %}" class="text-decoration-none">
+        <img src="{{post.article.postimage.url}}" class="img-fluid" alt="">
+        <h3 class="fw-bold">{{post.article.title}}</h3>
+        <p class="text-muted">{{post.article.date}}</p>
+        <p class="text-muted">posted by {{post.article.author.username}}</p>
+        <div class="my-3 text-dark">
+          {{post.article.content | truncatechars:200|safe }}
+        </div>
+        {% if post.likes.count == 1 %}
+        <p class="text-muted">{{post.article.likes.count}} person likes this post</p>
+        {% else %}
+        <p class="text-muted">{{post.article.likes.count}} peoples likes this post</p>
+        <a href="{% url 'remove_favourite' post.id %}" onclick="return confirm('Are you sure? to remove ')"
+          class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Remove this post</a>
+        {% endif %}
+
+        read more
+      </a>
+
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}
